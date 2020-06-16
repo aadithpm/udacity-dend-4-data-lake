@@ -81,7 +81,7 @@ def process_song_data(spark, input_data, output_data):
     songs_table.printSchema()
     songs_table_path = f'{output_data}songs_table.{get_time()}'
     print(f'Writing songs table as parquet to {songs_table_path}..')
-    # songs_table.write.partitionBy('year', 'artist_id').parquet(songs_table_path)
+    songs_table.write.partitionBy('year', 'artist_id').parquet(songs_table_path)
 
     # artists table
     artists_table = spark.sql("""
@@ -98,7 +98,7 @@ def process_song_data(spark, input_data, output_data):
     artists_table.printSchema()
     artists_table_path = f'{output_data}artists_table.{get_time()}'
     print(f'Writing artists table as parquet to {artists_table_path}..')
-    # artists_table.write.parquet(artists_table_path)
+    artists_table.write.parquet(artists_table_path)
 
 
 
@@ -141,7 +141,7 @@ def process_log_data(spark, input_data_songs, input_data_logs, output_data):
     users_table.printSchema()
     users_table_path = f'{output_data}users_table.{get_time()}'
     print(f'Writing users table as parquet to {users_table_path}..')
-    # users_table.write.parquet(users_table_path)
+    users_table.write.parquet(users_table_path)
 
     # time table
     log_data_time = log_data.withColumn('time', make_timestamp('ts'))
@@ -162,7 +162,7 @@ def process_log_data(spark, input_data_songs, input_data_logs, output_data):
     time_table.printSchema()
     time_table_path = f'{output_data}time_table.{get_time()}'
     print(f'Writing time table as parquet to {time_table_path}..')
-    # time_table.write.partitionBy("year", "month").parquet(time_table_path)
+    time_table.write.partitionBy("year", "month").parquet(time_table_path)
 
     # songplays table
     joined_data = log_data_time_final.join(song_data,
@@ -188,7 +188,7 @@ def process_log_data(spark, input_data_songs, input_data_logs, output_data):
     songplays_table.printSchema()
     songplays_table_path = f'{output_data}songplays_table.{get_time()}'
     print(f'Writing songplays table as parquet to {songplays_table_path}..')
-    # songplays_table.write.partitionBy("year", "month").parquet(songplays_table_path)
+    songplays_table.write.partitionBy("year", "month").parquet(songplays_table_path)
 
 
 
