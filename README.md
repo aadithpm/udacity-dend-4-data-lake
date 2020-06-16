@@ -16,7 +16,7 @@ This documentation is split up into these following sections:
 
 ## 1. Table Design and Schemas
 
-![ER Diagram](https://i.imgur.com/8zYZVo3.png)
+![ER Diagram](https://i.imgur.com/OIJFx5n.png)
 
 ## 2. Data extraction and transformation
 
